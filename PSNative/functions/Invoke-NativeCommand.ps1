@@ -32,6 +32,7 @@
 		
 		Launches nslookup, resolving wikipedia.org against 1.1.1.1.
 	#>
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSAvoidUsingEmptyCatchBlock", "")]
 	[CmdletBinding(PositionalBinding = $false)]
 	param (
 		[Parameter(Mandatory = $true, Position = 0)]
