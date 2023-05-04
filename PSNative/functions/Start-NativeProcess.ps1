@@ -51,6 +51,7 @@
 		
 		Starts a persistent cmd process, then sends the dir command to it and reads the response.
 	#>
+	[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "")]
 	[CmdletBinding()]
 	param (
 		[Parameter(Mandatory = $true)]
