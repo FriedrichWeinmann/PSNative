@@ -35,6 +35,7 @@
 		if ($this.WorkingDirectory) { $info.WorkingDirectory = $this.WorkingDirectory }
 		foreach ($entry in $this.ArgumentList) { $info.ArgumentList.Add($entry) }
 	
+		if ($global:PSVersionTable.PSVersion.Major -lt 6) { $info.UseShellExecute = $false }
 		$info.RedirectStandardInput = $true
 		$info.RedirectStandardError = $true
 		$info.RedirectStandardOutput = $true
