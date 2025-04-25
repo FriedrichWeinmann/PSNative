@@ -33,9 +33,14 @@
 		$info = [System.Diagnostics.ProcessStartInfo]::new()
 		$info.FileName = $this.Name
 		if ($this.WorkingDirectory) { $info.WorkingDirectory = $this.WorkingDirectory }
-		foreach ($entry in $this.ArgumentList) { $info.ArgumentList.Add($entry) }
+		if ($global:PSVersionTable.PSVersion.Major -lt 6) {
+			$info.UseShellExecute = $false
+			$info.Arguments = $this.ArgumentList -join " "
+		}
+		else {
+			foreach ($entry in $this.ArgumentList) { $info.ArgumentList.Add($entry) }
+		}
 	
-		if ($global:PSVersionTable.PSVersion.Major -lt 6) { $info.UseShellExecute = $false }
 		$info.RedirectStandardInput = $true
 		$info.RedirectStandardError = $true
 		$info.RedirectStandardOutput = $true

@@ -67,10 +67,17 @@
 			}
 			$info.WorkingDirectory = $resolved.Path
 		}
-		foreach ($entry in $ArgumentList) { $info.ArgumentList.Add($entry) }
+		if ($global:PSVersionTable.PSVersion.Major -lt 6) {
+			$info.UseShellExecute = $false
+			$info.Arguments = $ArgumentList -join " "
+		}
+		else {
+			foreach ($entry in $ArgumentList) { $info.ArgumentList.Add($entry) }
+		}
 
 		$info.RedirectStandardError = $true
 		$info.RedirectStandardOutput = $true
+
 
 		if ($Credential) {
 			$info.Password = $Credential.Password
